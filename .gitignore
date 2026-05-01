@@ -1,0 +1,9 @@
+# 若将「仅主题 + 插件」单独作为 Git 仓库根目录使用，可将本文件复制为 .gitignore
+
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+*.swp
+*~
