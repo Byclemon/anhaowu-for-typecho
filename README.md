@@ -4,7 +4,7 @@
 
 **在线演示**：[https://www.anhaowu.com](https://www.anhaowu.com)
 
-面向个人博客（阅读、摄影、音乐、生活记录等）的 Typecho 主题 **anhaowu**，以及配套插件 **AnhaoPlugin**。主题负责前台展示与 SEO 元信息；插件提供相册数据管理、站点地图与 robots 路由。主题目录下的 `screenshot.png` 为 Typecho 后台外观列表中的预览图，亦为本文档配图。
+面向个人博客（阅读、摄影、音乐、生活记录等）的 Typecho 主题 **anhaowu**，以及配套插件 **AnhaoPlugin**。
 
 **GitHub 仓库**：[https://github.com/Byclemon/anhaowu-for-typecho](https://github.com/Byclemon/anhaowu-for-typecho)
 
@@ -12,7 +12,7 @@
 
 ## 本仓库包含什么
 
-本仓库**只收录**主题与插件，不包含完整 Typecho 程序、数据库或 `config.inc.php`。克隆后把目录对拷到已有 Typecho 站点即可。
+本仓库**只收录**主题与插件，下载后把目录对拷到已有 Typecho 站点即可。
 
 建议仓库根目录结构如下：
 
@@ -104,27 +104,11 @@ anhaowu-for-typecho/
 - 上传目录：`usr/uploads/anhao-gallery/`（请保证 Web 服务器可写）。
 - 前台 `page-gallery.php` 在检测到 `AnhaoPlugin_Plugin` 类存在时，会读取插件中的图片数据。
 
-### 站点地图与 robots.txt
 
-插件注册以下路由（具体是否可访问取决于服务器伪静态与 Nginx 配置）：
-
-- `/sitemap.xml`、`/robots.txt`
-- `/index.php/sitemap.xml`、`/index.php/robots.txt`
-- **兜底路径**（推荐在搜索引擎或站长工具里先验证这两个是否 200）：
-  - `/action/anhaoplugin/sitemap.xml`
-  - `/action/anhaoplugin/robots.txt`
-
-**宝塔 / Nginx 说明**：若根路径的 `sitemap.xml` 返回 404，通常需要把请求转发到 Typecho 的 `index.php`，或直接使用上述 `action` 路径作为站点地图地址。
 
 ### 插件配置
 
 - **默认分类**：后台新增图片时的默认分类名称（默认示例：`生活点滴`）。
-
----
-
-## 本地开发说明
-
-本仓库**不含**完整 Typecho 与启动脚本。本地调试请在已安装的 Typecho 中放入本仓库的 `usr/themes/anhaowu` 与 `usr/plugins/AnhaoPlugin`，再按 Typecho 官方方式配置 Web 服务器与数据库。
 
 ---
 
@@ -133,13 +117,10 @@ anhaowu-for-typecho/
 1. **启用插件后报类名相关错误**  
    请使用与本仓库一致的 `AnhaoPlugin` 版本；若 Typecho 版本较旧，需在测试环境核对 `Typecho_Widget` 与 Widget 命名空间兼容性。
 
-2. **sitemap 在浏览器里看起来“多了 CSS”**  
-   先使用 `curl` 或「查看源代码」确认服务端响应是否为纯 XML；部分浏览器扩展会往 XML 预览页注入样式。
-
-3. **相册页空白**  
+2. **相册页空白**  
    确认插件已启用且后台已添加图片；检查 `usr/uploads/anhao-gallery/` 权限。
 
-4. **作品页内容不对**  
+3. **作品页内容不对**  
    在主题设置中检查 **作品页分类 Slug** 是否与后台分类的 **缩略名（slug）** 完全一致（区分大小写按主题实现为准，当前为不区分大小写匹配）。
 
 ---
