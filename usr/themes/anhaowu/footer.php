@@ -20,8 +20,61 @@
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
+    if (nav) {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    }
   });
+
+  /**
+   * 小屏导航：抽屉菜单开关、遮罩关闭、跳转后关闭、Escape 关闭。
+   */
+  (function () {
+    const rootNav = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    const backdrop = document.getElementById('nav-backdrop');
+    const panel = document.getElementById('nav-panel');
+    if (!rootNav || !toggle || !panel) {
+      return;
+    }
+
+    function setNavOpen(open) {
+      rootNav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+      document.body.classList.toggle('nav-menu-open', open);
+      if (backdrop) {
+        backdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
+    }
+
+    toggle.addEventListener('click', function () {
+      setNavOpen(!rootNav.classList.contains('is-open'));
+    });
+
+    if (backdrop) {
+      backdrop.addEventListener('click', function () {
+        setNavOpen(false);
+      });
+    }
+
+    panel.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setNavOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        setNavOpen(false);
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900 && rootNav.classList.contains('is-open')) {
+        setNavOpen(false);
+      }
+    });
+  })();
 
   const observerOptions = {
     threshold: 0.15,

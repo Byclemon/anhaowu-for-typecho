@@ -33,7 +33,7 @@
 <body>
 <?php $logoData = themeResolveLogoData($this->options->logoUrl, $this->options->title); ?>
 
-<nav id="nav">
+<nav id="nav" class="site-nav">
   <a href="<?php $this->options->siteUrl(); ?>" class="nav-logo">
     <?php if ($logoData['mode'] === 'image'): ?>
       <img src="<?php echo htmlspecialchars($logoData['value'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php $this->options->title(); ?>" style="height: 32px; width: auto; display: block;">
@@ -41,11 +41,19 @@
       <?php echo htmlspecialchars($logoData['value'], ENT_QUOTES, 'UTF-8'); ?>
     <?php endif; ?>
   </a>
-  <ul class="nav-links">
-    <li><a href="<?php $this->options->siteUrl(); ?>"<?php if($this->is('index')) echo ' class="active"'; ?>>首页</a></li>
-    <?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
-    <?php while($pages->next()): ?>
-      <li><a href="<?php $pages->permalink(); ?>"<?php if($this->is('page', $pages->slug)) echo ' class="active"'; ?>><?php $pages->title(); ?></a></li>
-    <?php endwhile; ?>
-  </ul>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="nav-panel" aria-expanded="false" aria-label="打开导航菜单">
+    <span class="nav-toggle-bar" aria-hidden="true"></span>
+    <span class="nav-toggle-bar" aria-hidden="true"></span>
+    <span class="nav-toggle-bar" aria-hidden="true"></span>
+  </button>
+  <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+  <div class="nav-panel" id="nav-panel">
+    <ul class="nav-links">
+      <li><a href="<?php $this->options->siteUrl(); ?>"<?php if($this->is('index')) echo ' class="active"'; ?>>首页</a></li>
+      <?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
+      <?php while($pages->next()): ?>
+        <li><a href="<?php $pages->permalink(); ?>"<?php if($this->is('page', $pages->slug)) echo ' class="active"'; ?>><?php $pages->title(); ?></a></li>
+      <?php endwhile; ?>
+    </ul>
+  </div>
 </nav>

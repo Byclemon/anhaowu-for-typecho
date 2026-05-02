@@ -1,6 +1,6 @@
 <?php
 /**
- * ANHAOWU（安皓屋）— Typecho 个人博客主题
+ * ANHAOWU（安好屋）— Typecho 个人博客主题
  *
  * 极简阅读向布局，含首页 Hero、随笔区块、归档与独立页模板；支持 SEO 元信息、页脚自定义 HTML、作品页按分类筛选等。
  * 相册展示可配合同名配套插件 AnhaoPlugin 使用。
