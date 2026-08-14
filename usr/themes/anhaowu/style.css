@@ -430,11 +430,15 @@ footer .footer-custom a {
   z-index: 1;
   width: min(92vw, 980px);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
 .hero-pen {
   font-size: 2.5rem;
+  line-height: 1;
   margin-bottom: 1.15rem;
   color: var(--accent);
   opacity: 0;
@@ -447,8 +451,8 @@ footer .footer-custom a {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 400;
   letter-spacing: 0.35em;
-  position: relative;
-  left: -0.16em;
+  /* letter-spacing 会在末字后留空，补同等左内边距才能视觉居中 */
+  padding-inline-start: 0.35em;
   margin-bottom: 0.65rem;
   opacity: 0;
   animation: fadeUp 1s 0.5s ease forwards;
@@ -467,6 +471,7 @@ footer .footer-custom a {
   font-size: 1.05rem;
   color: var(--muted);
   letter-spacing: 0.2em;
+  padding-inline-start: 0.2em;
   margin-top: 0.15rem;
   opacity: 0;
   animation: fadeUp 1s 1s ease forwards;
@@ -505,9 +510,8 @@ footer .footer-custom a {
 .scroll-hint {
   position: absolute;
   bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-left: -0.16em;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -519,6 +523,7 @@ footer .footer-custom a {
 .scroll-hint span {
   font-size: 0.72rem;
   letter-spacing: 0.15em;
+  padding-inline-start: 0.15em;
   color: var(--muted);
 }
 
